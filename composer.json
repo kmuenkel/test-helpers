@@ -1,0 +1,70 @@
+{
+    "name": "kmuenkel/test-helpers",
+    "description": "Guzzle mocking, route parsing, token management, and event/listener control",
+    "type": "library",
+    "license": "MIT",
+    "readme": "README.md",
+    "time": "2021-08-03 13:10:00",
+    "authors": [
+        {
+            "name": "Kevin Muenkel",
+            "email": "kevin_tm@yahoo.com"
+        }
+    ],
+    "keywords": [
+        "PhpUnit",
+        "Guzzle",
+        "Laravel",
+        "Route",
+        "Passport",
+        "Oauth2",
+        "JWT",
+        "Events"
+    ],
+    "require": {
+        "php": ">=7.3",
+        "ext-json": "*",
+        "ext-openssl": "*",
+        "ext-dom": "*",
+        "ext-libxml": "*",
+        "laravel/framework": "^7.0|^8.0",
+        "laravel/passport": "^9.3",
+        "fzaninotto/faker": "^1.9",
+        "phpunit/phpunit": "^9.4",
+        "mockery/mockery": "^1.4",
+        "guzzlehttp/guzzle": "^7.3"
+    },
+    "require-dev": {
+        "barryvdh/laravel-ide-helper": "^2.8",
+        "orchestra/testbench": "^5.7",
+        "friendsofphp/php-cs-fixer": "^2.16",
+        "squizlabs/php_codesniffer": "^3.5",
+        "phpmd/phpmd": "^2.9"
+    },
+    "autoload": {
+        "psr-4": {
+            "TestHelper\\": "src/",
+            "TestHelper\\Tests\\": "tests/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "config": {
+        "preferred-install": "dist"
+    },
+    "scripts": {
+        "post-update-cmd": [
+            "Illuminate\\Foundation\\ComposerScripts::postUpdate",
+            "[ $COMPOSER_DEV_MODE -eq 0 ] || php artisan ide-helper:generate",
+            "[ $COMPOSER_DEV_MODE -eq 0 ] || php artisan ide-helper:meta"
+        ],
+        "post-install-cmd": [
+            "Illuminate\\Foundation\\ComposerScripts::postInstall",
+            "[ $COMPOSER_DEV_MODE -eq 0 ] || php artisan ide-helper:generate",
+            "[ $COMPOSER_DEV_MODE -eq 0 ] || php artisan ide-helper:meta"
+        ]
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
