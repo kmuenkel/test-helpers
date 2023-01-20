@@ -44,6 +44,16 @@ class TestCase extends BaseTestCase
         static::generateAppKey($this->app);
         $this->faker = app(Faker::class);
     }
+    
+    protected function getEnvironmentSetUp($app)
+    {
+        $envPath = __DIR__ . '/..';
+        $possibleEnvs = ['.env.testing', '.env', '.env.example'];
+        $findEnv = fn (string $file, string $name) => $file ?: (is_file("$envPath/$name") ? $name : '');
+        $file = array_reduce($possibleEnvs, $findEnv, '');
+        $file && Dotenv::create(Env::getRepository(), $envPath, $file)->safeLoad();
+        $app->make(LoadConfiguration::class)->bootstrap($app);
+    }
 
     /**
      * @param Application $app
