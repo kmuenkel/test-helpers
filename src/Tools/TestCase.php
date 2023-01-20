@@ -10,6 +10,7 @@ use Faker\Generator as Faker;
 use UnexpectedValueException;
 use Illuminate\Routing\Router;
 use Illuminate\Config\Repository;
+use Illuminate\Support\{Arr, Env};
 use Illuminate\Encryption\Encrypter;
 use Illuminate\Foundation\Application;
 use Orchestra\Testbench\Exceptions\Handler;
@@ -164,7 +165,9 @@ class TestCase extends BaseTestCase
      */
     protected function getPackageProviders($app)
     {
-        return [PassportServiceProvider::class];
+        $composerConfig = json_decode(file_get_contents(__DIR__ . '/../composer.json'), true);
+
+        return Arr::get($composerConfig, 'extra.laravel.providers');
     }
 
     /**
